@@ -19,8 +19,8 @@ public class Drive {
 	
 	public void driveForward() { 
 	   mA.startSynchronization();
-	   mA.forward();
 	   mB.forward();
+	   mA.forward();
 	   mA.endSynchronization();
 	}	
 	public void driveBackward() {
@@ -28,7 +28,7 @@ public class Drive {
 	   mA.backward();
 	   mB.backward();
 	   mA.endSynchronization();
-	}
+	   }
 	public void turnLeft(){
 		mA.forward();
 	}
@@ -40,11 +40,10 @@ public class Drive {
 		mB.flt();
 	}
 	public void stop() {
+		mA.startSynchronization();
 		mA.stop();
 		mB.stop();
-	}
-	public void rotateMotor() {
-		mA.rotate(90);
-	}
+		mA.endSynchronization();
 
+	}
 }

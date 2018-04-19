@@ -1,5 +1,6 @@
 package robo;
 
+import lejos.hardware.Button;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;
 
@@ -34,6 +35,10 @@ public class IR extends Thread {
 	public void run() {
 			while (!stopSampling) {
 				this.remoteCmd = irSensor.getRemoteCommand(0);
+				if (Button.ESCAPE.isDown()) {
+					this.stopSampling = true;
 				}
+			}
+			return;
 	}
 }
