@@ -20,7 +20,6 @@ public class Colorsense extends Thread {
 		while (!Button.ESCAPE.isDown()) {
 			switch (cs.getColorID()) {
 			case Color.BLUE:
-				
 				File music = new File("blue.wav");
 				Sound.playSample(music, 100);
 				Sound.setVolume(100);

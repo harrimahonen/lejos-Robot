@@ -16,6 +16,7 @@ public class Controller extends Thread {
 	RegulatedMotor motorA;
 	RegulatedMotor motorB;
 	Drive drive;
+	Colorsense cs;
 
 	public Controller() {
 		motorB = new EV3LargeRegulatedMotor(MotorPort.A);
@@ -23,16 +24,15 @@ public class Controller extends Thread {
 		irSensor = new EV3IRSensor(SensorPort.S2);
 		IRthread = new IR(irSensor);
 		drive = new Drive(motorA, motorB);
-
+		cs = new Colorsense();
 	}
 
 	public void run() {
 
 		LCD.drawInt((int) drive.maxSpeed, 0, 2);
 		IRthread.start();
-
+		cs.start();
 		while (!Button.ESCAPE.isDown()) {
-
 			// Remote controller reader
 			switch (IRthread.getRemoteCmd()) {
 				case 0:
