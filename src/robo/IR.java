@@ -1,6 +1,7 @@
 package robo;
 
 import lejos.hardware.Button;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;
 
@@ -11,7 +12,7 @@ public class IR extends Thread {
 	private boolean stopSampling = false;
 	private SampleProvider distance;
 	float[] distSample;
-	//private int counter = 0;
+	private int counter = 0;
 
 	public IR(EV3IRSensor sensor) {
 		this.irSensor = sensor;
@@ -35,6 +36,13 @@ public class IR extends Thread {
 	public void run() {
 			while (!stopSampling) {
 				this.remoteCmd = irSensor.getRemoteCommand(0);
+				distance.fetchSample(distSample, 0);
+				LCD.drawString("Distance: ",0,1);
+				if (counter >= 10) {
+				LCD.drawString(distSample[0]+"",0,2);
+				counter = 0;
+				}
+				counter++;
 				if (Button.ESCAPE.isDown()) {
 					this.stopSampling = true;
 				}
