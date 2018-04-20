@@ -24,6 +24,17 @@ public class Colorsense extends Thread {
 				Sound.playSample(music, 100);
 				Sound.setVolume(100);
 				break;
+			case Color.GREEN:
+				File music2 = new File("green.wav");
+				Sound.playSample(music2, 100);
+				Sound.setVolume(100);
+				break;
+			case Color.RED:
+				File music3 = new File("red.wav");
+				Sound.playSample(music3, 100);
+				Sound.setVolume(100);
+				break;
+				
 				
 			}
 		}
