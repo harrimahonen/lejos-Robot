@@ -17,44 +17,27 @@ public class Controller extends Thread {
 	RegulatedMotor motorB;
 	Drive drive;
 	Colorsense cs;
-
+	
 	public Controller() {
 		motorB = new EV3LargeRegulatedMotor(MotorPort.A);
 		motorA = new EV3LargeRegulatedMotor(MotorPort.D);
 		irSensor = new EV3IRSensor(SensorPort.S2);
 		IRthread = new IR(irSensor);
 		drive = new Drive(motorA, motorB);
-		cs = new Colorsense();
+		//cs = new Colorsense();
 	}
 
 	public void run() {
-
-		LCD.drawInt((int) drive.maxSpeed, 0, 2);
-		IRthread.start();
-		cs.start();
-		while (!Button.ESCAPE.isDown()) {
-			// Remote controller reader
-			switch (IRthread.getRemoteCmd()) {
-				case 0:
-					drive.stop();
-					break;
-				case 1:
-					drive.driveForward();
-					break;
-				case 2:
-					drive.driveBackward();
-					break;
-				case 3:
-					drive.turnLeft();
-					break;
-				case 4:
-					drive.turnRight();
-					break;
-			}
+		//LCD.drawInt((int) drive.maxSpeed, 0, 2);
+		//IRthread.start();
+		//cs.start();
+		while(!Button.DOWN.isDown()) {
+			
 		}
+		
 		motorA.close();
 		motorB.close();
-		IRthread.interrupt();
+		//IRthread.interrupt();
 
 	}
 }
