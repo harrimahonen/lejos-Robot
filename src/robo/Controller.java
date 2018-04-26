@@ -15,17 +15,17 @@ public class Controller extends Thread {
 	// initialize
 	RegulatedMotor motorA;
 	RegulatedMotor motorB;
+	RegulatedMotor motorC;
 	Drive drive;
-	Colorsense cs;
 	
 	public Controller() {
 		motorB = new EV3LargeRegulatedMotor(MotorPort.A);
 		motorA = new EV3LargeRegulatedMotor(MotorPort.D);
+		motorC = new EV3LargeRegulatedMotor(MotorPort.C);
 		irSensor = new EV3IRSensor(SensorPort.S2);
 		IRthread = new IR(irSensor);
-		drive = new Drive(motorA, motorB);
-		//cs = new Colorsense();
-	}
+		drive = new Drive(motorA, motorB, motorC);
+		}
 
 	public void run() {
 		//LCD.drawInt((int) drive.maxSpeed, 0, 2);

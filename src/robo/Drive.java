@@ -1,17 +1,20 @@
 package robo;
 
 import lejos.robotics.RegulatedMotor;
+import lejos.utility.Delay;
 
 public class Drive {
 	
 	private RegulatedMotor mA;
 	private RegulatedMotor mB;
+	private RegulatedMotor mC;
 	final float maxSpeed;
 	
-	public Drive(RegulatedMotor mA, RegulatedMotor mB) {
+	public Drive(RegulatedMotor mA, RegulatedMotor mB, RegulatedMotor mC) {
 	maxSpeed = mA.getMaxSpeed();
 	this.mA = mA;
 	this.mB = mB;
+	this.mC = mC;
 	this.mA.setSpeed((int)maxSpeed);
 	this.mB.setSpeed((int)maxSpeed);
 	mA.synchronizeWith(new RegulatedMotor[] {mB});
@@ -45,5 +48,9 @@ public class Drive {
 		mB.stop();
 		mA.endSynchronization();
 
+	}
+	public void sabotage() {
+		mC.rotate(10);
+		mC.rotate(-10);
 	}
 }

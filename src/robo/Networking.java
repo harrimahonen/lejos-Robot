@@ -1,25 +1,22 @@
 package robo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 
 import org.java_websocket.WebSocket;
-import org.java_websocket.WebSocketImpl;
-//import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 public class Networking extends WebSocketServer{
-	private int cmd = 0;
 	Controller ctrl;
+	Colorsense cs;
+	String msg;
 	
 	public Networking( int port, Controller controller ) {
         super( new InetSocketAddress( port ) );
         ctrl = controller;
+        cs = new Colorsense();
+        cs.start();
     }
 
     public Networking( InetSocketAddress address ) {
@@ -35,55 +32,37 @@ public class Networking extends WebSocketServer{
 
     @Override
     public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
-        //broadcast( conn + " has left the room!" );
         System.out.println( conn + " has left!" );
     }
 
     @Override
     public void onMessage( WebSocket conn, String message ) {
-        //System.out.println( conn + " : "+message );
-        if(message.equals("UP")){
-            //System.out.println("Move UP!");
+        if(message.equals("UP")){    
+        	conn.send(cs.getColor());
            ctrl.drive.driveForward();
         }
-        if(message.equals("")) {
+        if(message.equals("STOP")) {
         	ctrl.drive.stop();
         }
         if(message.equals("DOWN")) {
-        	ctrl.drive.stop();
+        	ctrl.drive.driveBackward();
         }
-                
-        /*if(message.equals("")) {
-            System.out.println("Cmd 0");
-        	cmd = 0;
-        }*/
+        if(message.equals("RIGHT")) {
+        	ctrl.drive.turnRight();
+        }
+        if(message.equals("LEFT")) {
+        	ctrl.drive.turnLeft();
+        }
+        if(message.equals("SABOTAGE")) {
+        	ctrl.drive.sabotage();
+        }
     }
     @Override
     public void onMessage( WebSocket conn, ByteBuffer message ) {
-        //broadcast( message.array() );
-        //System.out.println( conn + ": " + message );
-
+        
     }
 
 
-    public void startServer(){
-        //WebSocketImpl.DEBUG = true;
-        int port = 8887; // 843 flash policy port
-        //Networking s = new Networking( port );
-        //s.start();
-        //System.out.println( "Server started on port: " + s.getPort() );
-
-        /*BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
-        while ( true ) {
-            String in = sysin.readLine();
-            s.broadcast( in );
-            if( in.equals( "exit" ) ) {
-                s.stop(1000);
-                break;
-            }
-        }
-        */
-    }
     @Override
     public void onError( WebSocket conn, Exception ex ) {
         ex.printStackTrace();
@@ -94,9 +73,5 @@ public class Networking extends WebSocketServer{
     @Override
     public void onStart() {
         System.out.println("Server started!");
-    }
-    
-    public int getRemoteComm() {
-    	return this.cmd;
     }
 }
