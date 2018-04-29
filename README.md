@@ -7,6 +7,6 @@ This robot has the ability to read colors via color sensor, which it will transm
 
 Needs a web front end for network controls which can be found in the links section.
 
-Links:
-Java WebSockets https://github.com/TooTallNate/Java-WebSocket
+Links:  
+Java WebSockets https://github.com/TooTallNate/Java-WebSocket  
 WebSocket-Client-EV3 https://github.com/harrimahonen/websocket-client-ev3
