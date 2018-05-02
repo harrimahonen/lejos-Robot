@@ -53,6 +53,18 @@ public class Networking extends WebSocketServer{
         if(message.equals("LEFT")) {
         	ctrl.drive.turnLeft();
         }
+        if(message.equals("UPLEFT")) {
+        	ctrl.drive.turnUpleft();
+        }
+        if(message.equals("UPRIGHT")) {
+        	ctrl.drive.turnUpright();
+        }
+        if(message.equals("DOWNLEFT")) {
+        	ctrl.drive.turnDownleft();
+        }
+        if(message.equals("DOWNRIGHT")) {
+        	ctrl.drive.turnDownright();
+        }
         if(message.equals("SABOTAGE")) {
         	ctrl.drive.sabotage();
         }
