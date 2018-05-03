@@ -1,5 +1,10 @@
 package robo;
 
+
+/*
+ * The main method to start running other processes.
+ */
+
 public class Rattopojat {
 	public static void main(String[] args) {
 		Controller main = new Controller();

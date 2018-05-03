@@ -1,8 +1,10 @@
 package robo;
 
 import lejos.robotics.RegulatedMotor;
-import lejos.utility.Delay;
 
+/*
+ * This class will handle the motor functions.
+ */
 public class Drive {
 	
 	private RegulatedMotor mA;

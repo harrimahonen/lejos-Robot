@@ -6,7 +6,13 @@ import java.nio.ByteBuffer;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
-
+/*
+*
+*This class will handle networking requirements by listening to WebSockets at port 8887
+*Listener is started on constructor and will respond to messages by client(s).
+*If this class receives directional messages, it will control the motors in Drive class accordingly.
+*
+*/
 public class Networking extends WebSocketServer{
 	Controller ctrl;
 	Colorsense cs;

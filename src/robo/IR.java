@@ -4,7 +4,10 @@ import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;
-
+/*
+ * This class will handle detecting signals from infrared remote controller
+ *  
+ */
 public class IR extends Thread {
 
 	private EV3IRSensor irSensor;
