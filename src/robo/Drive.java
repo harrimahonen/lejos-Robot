@@ -1,6 +1,7 @@
 package robo;
 
 import lejos.robotics.RegulatedMotor;
+import lejos.utility.Delay;
 
 /*
  * This class will handle the motor functions.
@@ -88,5 +89,15 @@ public class Drive {
 	public void sabotage() {
 		mC.rotate(10);
 		mC.rotate(-10);
+	}
+	public void escape() {
+		turnRight();
+		Delay.msDelay(2000);
+		this.mA.setSpeed((int)maxSpeed);
+		this.mB.setSpeed((int)maxSpeed);
+		mA.forward();
+		mB.forward();
+		Delay.msDelay(4000);
+		stop();
 	}
 }
